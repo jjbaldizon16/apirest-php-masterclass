@@ -2,13 +2,18 @@
 
 class ControladorCursos{
 
-      /** Mostrar todos los registros */
+      /** Mostrar todos los cursos */
 
       public function index(){
 
+        $cursos = ModeloCursos::index("cursos");
+
+
         $json = array(
 
-            "detalle"=>"Mostrando todos los cursos"
+            "status"=>200,
+            "total_registros"=>count($cursos),
+            "detalle"=>$cursos
        
        );
        
