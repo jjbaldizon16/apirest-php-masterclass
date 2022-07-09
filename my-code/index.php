@@ -6,4 +6,4 @@ $rutas = new ControladorRutas();
 $rutas -> index();
 
 
-/*Hola esto es un comentario XD
+
