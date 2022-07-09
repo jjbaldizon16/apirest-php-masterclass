@@ -18,7 +18,7 @@ class ControladorCursos{
 
       }
 
-       /** Crear curso */
+       /** Crear un curso */
 
       public function create(){
 
@@ -33,5 +33,56 @@ class ControladorCursos{
        return;   
 
       }
+
+          /** Mostrar un curso */
+
+          public function show($id){
+
+            $json = array(
+    
+                "detalle"=>"Mostrando el curso con el id: ".$id
+           
+           );
+           
+           echo json_encode($json, true);
+        
+           return;   
+    
+          }  
+      
+      
+      /** Editar un curso */
+
+        public function update($id){
+
+            $json = array(
+    
+                "detalle"=>"Curso editado satisfactoriamente con el id: ".$id
+           
+           );
+           
+           echo json_encode($json, true);
+        
+           return;   
+    
+          }
+
+      /** Borrar un curso */
+
+      public function delete($id){
+
+        $json = array(
+
+            "detalle"=>"Curso borrado satisfactoriamente con el id: ".$id
+       
+       );
+       
+       echo json_encode($json, true);
+    
+       return;   
+
+      }
+
+      
 
 }

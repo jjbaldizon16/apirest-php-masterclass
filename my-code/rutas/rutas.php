@@ -67,15 +67,36 @@ return;
 
         if(array_filter($arrayRutas)[1] == "cursos" && is_numeric(array_filter($arrayRutas)[2])){
 
-            $json = array(
-    
-                "detalle"=>"estoy en un solo curso"
-           
-           );
-           
-           echo json_encode($json, true);
+            /**Preguntar peticiones de tipo GET */
 
-           return;
+        if(isset($_SERVER["REQUEST_METHOD"]) &&  $_SERVER["REQUEST_METHOD"] == "GET"){
+
+            $mostrarCurso = new ControladorCursos();
+            $mostrarCurso -> show(array_filter($arrayRutas)[2]);
+     
+
+        }
+            
+            
+            /**Preguntar peticiones de tipo PUT */
+
+        if(isset($_SERVER["REQUEST_METHOD"]) &&  $_SERVER["REQUEST_METHOD"] == "PUT"){
+
+            $editarCurso = new ControladorCursos();
+            $editarCurso -> update(array_filter($arrayRutas)[2]);
+     
+
+        }
+
+            /**Preguntar peticiones de tipo DELETE */
+
+            if(isset($_SERVER["REQUEST_METHOD"]) &&  $_SERVER["REQUEST_METHOD"] == "DELETE"){
+
+                $borrarCurso = new ControladorCursos();
+                $borrarCurso -> delete(array_filter($arrayRutas)[2]);
+         
+    
+            }
 
         }
 
