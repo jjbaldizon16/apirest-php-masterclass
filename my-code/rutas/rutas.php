@@ -24,15 +24,14 @@ return;
 
   if(array_filter($arrayRutas)[1] == "registro"){
 
-    $json = array(
+       /**Preguntando si hay peticiones tipo POST */ 
 
-        "detalle"=>"estoy en registro"
-   
-   );
-   
-   echo json_encode($json, true);
+    if(isset($_SERVER["REQUEST_METHOD"]) &&  $_SERVER["REQUEST_METHOD"] == "POST") {
 
-   return;
+       $cursos = new ControladorCursos();
+       $cursos -> index();
+
+}
 
   }
 
@@ -40,15 +39,25 @@ return;
 
     if(array_filter($arrayRutas)[1] == "cursos"){
 
-        $json = array(
-    
-            "detalle"=>"estoy en cursos"
-       
-       );
-       
-       echo json_encode($json, true);
+        /**Preguntar peticiones de tipo GET */
 
-       return;
+        if(isset($_SERVER["REQUEST_METHOD"]) &&  $_SERVER["REQUEST_METHOD"] == "GET"){
+
+            $registro = new ControladorCursos();
+            $registro -> index();
+     
+
+        }
+
+          /**Preguntar peticiones de tipo POST */
+
+        if(isset($_SERVER["REQUEST_METHOD"]) &&  $_SERVER["REQUEST_METHOD"] == "POST"){
+
+            $crearCurso = new ControladorCursos();
+            $crearCurso -> create();
+     
+
+        }
     
       }
 
