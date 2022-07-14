@@ -12,4 +12,3 @@ $rutas -> index();
 
 
 
-/**Terminacion de creacion de los modelos */
