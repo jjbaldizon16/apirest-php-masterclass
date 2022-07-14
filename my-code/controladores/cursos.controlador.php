@@ -6,21 +6,68 @@ class ControladorCursos{
 
       public function index(){
 
-        $cursos = ModeloCursos::index("cursos");
+        /**Validar credenciales cliente */
+
+        $clientes = ModeloClientes::index("clientes");
+
+        if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])){
 
 
-        $json = array(
+          foreach($clientes as $key => $valueCliente){
 
-            "status"=>200,
-            "total_registros"=>count($cursos),
-            "detalle"=>$cursos
-       
-       );
-       
-       echo json_encode($json, true);
+              if("Basic ".base64_encode($_SERVER['PHP_AUTH_USER'].":".$_SERVER['PHP_AUTH_PW']) 
+              == "Basic ".base64_encode($valueCliente["id_cliente"].":".$valueCliente["llave_secreta"]) ){
+                  
+                /**Mostrar todos los cursos con validacion */
+
+                $cursos = ModeloCursos::index("cursos");
+
+                 if(!empty($cursos)){
+
+                $json = array(
+        
+                    "status"=>200,
+                    "total_registros"=>count($cursos),
+                    "detalle"=>$cursos
+               
+               );
+               
+               echo json_encode($json, true);
+            
+               return;
+
+              }else {
+
+                  $json = array("status"=>200,"detalle"=>"Lista vacia");
+                  echo json_encode($json, true);
+                  return;
+
+              }
+
+              }else{
+               
+                $json = array("status"=>404,"detalle:"=>"Token no valido");
+                
+
+              }
+
+              
+
+          }
+
+          
+
+
+        }else {
+          $json = array("status"=>404,"detalle:"=>"Ocupa credenciales para poder entrar(id cliente y llave secreta)");
+
+          
+
+        }
+
+        echo json_encode($json, true);
+        return;             
     
-       return;   
-
       }
 
        /** Crear un curso */
