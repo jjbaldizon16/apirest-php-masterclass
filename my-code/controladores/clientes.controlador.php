@@ -93,12 +93,20 @@ class ControladorClientes {
                     );  
           $create = ModeloClientes::create("clientes", $datos);
           
-          echo '<pre>'; print_r($create); echo '</pre>';
-           return;
+          
 
           /**Respuesta del modelo */ 
 
-           
+           if($create == "ok"){
+
+               $json = array("status"=>200,
+               "detalle"=>"Registro exitoso, tome sus credenciales y guardelas",
+               "credenciales"=>array("id_cliente"=>$id_cliente, "llave_secreta"=>$llave_secreta)
+               );
+               echo json_encode($json, true);
+               return;
+
+           }
 
 
      }
