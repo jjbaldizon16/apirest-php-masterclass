@@ -55,7 +55,8 @@ class ControladorClientes {
 			return;
 		}
 
-        
+           $json = array("detalle"=>"Registro guardado");
+           echo json_encode($json, true);
 
 
      }
