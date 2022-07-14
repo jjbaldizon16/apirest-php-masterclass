@@ -25,11 +25,19 @@ return;
   if(array_filter($arrayRutas)[1] == "registro"){
 
        /**Preguntando si hay peticiones tipo POST */ 
-
+        
     if(isset($_SERVER["REQUEST_METHOD"]) &&  $_SERVER["REQUEST_METHOD"] == "POST") {
 
-       $cursos = new ControladorCursos();
-       $cursos -> index();
+        /**Capturando datos */  
+
+        $datos = array("nombre"=>$_POST["nombre"],
+                        "apellido"=>$_POST["apellido"],
+                        "email"=>$_POST["email"]);
+     
+                        
+
+       $cursos = new ControladorClientes();
+       $cursos -> create($datos);
 
 }
 
